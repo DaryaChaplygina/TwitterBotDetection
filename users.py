@@ -2,7 +2,7 @@ import pandas as pd
 
 
 class Users:
-    def __init__(self, path_df):
+    def __init__(self, path_df: str):
         self._data_frame = pd.read_csv(path_df, encoding="utf-8")
         self._current_path = path_df
 

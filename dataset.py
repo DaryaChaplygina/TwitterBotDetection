@@ -6,7 +6,7 @@ from text_processor_simple import TextProcessor
 
 
 class Dataset:
-    def __init__(self, path, label=""):
+    def __init__(self, path: str, label=""):
         self._path = path
         self._dataset = pd.DataFrame()
 
@@ -45,13 +45,13 @@ class Dataset:
             .apply(lambda id: [tp.preprocess(tweet) for tweet in
                                tweets.get_user_tweets(id)])
 
-    def save(self, save_path):
+    def save(self, save_path: str):
         if os.path.isfile(save_path):
             self._dataset.to_csv(save_path, mode='a', header=False)
         else:
             self._dataset.to_csv(save_path)
 
-    def merge_with(self, path1, name):
+    def merge_with(self, path1: str, name: str):
         df = pd.read_csv(path1)
         res = pd.merge(self._dataset, df, on='id', how='left')
         res.drop(labels=['Unnamed: 0'], axis=1, inplace=True)

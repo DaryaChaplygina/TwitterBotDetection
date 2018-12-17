@@ -3,26 +3,26 @@ import re
 
 
 class Tweets:
-    def __init__(self, path):
+    def __init__(self, path: str):
         self._data_frame = pd.read_csv(path, encoding="utf-8")
 
-    def get_user_tweets(self, uid):
+    def get_user_tweets(self, uid: int):
         return self._data_frame\
             .loc[self._data_frame['user_id'] == uid]['text'].values
 
-    def get_user_link_per_tweet(self, uid):
+    def get_user_link_per_tweet(self, uid: int):
         links = self._data_frame\
             .loc[self._data_frame['user_id'] == uid]['num_urls']
 
         return links.mean()
 
-    def get_user_unames_per_tweet(self, uid):
+    def get_user_unames_per_tweet(self, uid: int):
         unames = self._data_frame\
             .loc[self._data_frame['user_id'] == uid]['num_mentions']
 
         return unames.mean()
 
-    def get_user_unique_link_ratio(self, uid):
+    def get_user_unique_link_ratio(self, uid: int):
         link_regexp = 'https?:[^\s]+'
         tweets = self.get_user_tweets(uid)
         if len(tweets) == 0:
@@ -35,7 +35,7 @@ class Tweets:
 
         return len(set(all_links)) / len(tweets)
 
-    def get_user_unique_unames_ratio(self, uid):
+    def get_user_unique_unames_ratio(self, uid: int):
         uname_regexp = '@[^\s]+'
         tweets = self.get_user_tweets(uid)
         if len(tweets) == 0:

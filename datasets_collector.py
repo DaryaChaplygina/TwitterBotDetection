@@ -3,7 +3,7 @@ import json
 
 
 class DatasetsCollector:
-    def __init__(self, ds_name):
+    def __init__(self, ds_name: str):
         """
         loads csv tables from paths listed in dataset_path_list and merges
         them into one dataset
@@ -13,7 +13,7 @@ class DatasetsCollector:
         data = json.load(f)
         self._ds_files = data[ds_name]
 
-    def collect_all(self, save_path):
+    def collect_all(self, save_path: str):
         for [path, label] in self._ds_files:
             ds = Dataset(path, label)
             ds.add_user_features()

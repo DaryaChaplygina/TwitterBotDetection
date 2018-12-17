@@ -30,7 +30,7 @@ class TextProcessor:
         return ' '.join(stemmed)
 
     @staticmethod
-    def clean_text(text):
+    def clean_text(text: str):
         link_regexp = 'https?:[^\s]+'
         uname_regexp = '@[^\s]+'
         res = re.sub(link_regexp, '', text)
@@ -39,7 +39,7 @@ class TextProcessor:
             res = res.replace(c, ' ')
         return res
 
-    def __detect_language__(self, text):
+    def __detect_language__(self, text: str):
         predicted = self._language_model.predict(text)[0][0]
         return predicted.replace("__label__", "")
 
@@ -50,7 +50,7 @@ class TextProcessor:
             words))
 
     @staticmethod
-    def __europalp_tokenizer__(text, lang):
+    def __europalp_tokenizer__(text: str, lang: str):
         FNULL = open(os.devnull, 'w')
         p = subprocess.Popen(
             ["perl", "tools/europalp_tokenizer/tokenizer.perl", "-l", lang],
