@@ -18,10 +18,10 @@ class TextProcessor:
         lowercase = text.lower()
         text_cleaned = self.clean_text(lowercase)
 
-        if self.__detect_language__(text_cleaned) != "en":
+        if self.__detect_language(text_cleaned) != "en":
             return ""
 
-        tokens = self.__europalp_tokenizer__(text_cleaned, "en")
+        tokens = self.__europalp_tokenizer(text_cleaned, "en")
         tokens = self.drop_stopwords(tokens)
 
         ps = PorterStemmer()
@@ -39,7 +39,7 @@ class TextProcessor:
             res = res.replace(c, ' ')
         return res
 
-    def __detect_language__(self, text: str):
+    def __detect_language(self, text: str):
         predicted = self._language_model.predict(text)[0][0]
         return predicted.replace("__label__", "")
 
@@ -50,7 +50,7 @@ class TextProcessor:
             words))
 
     @staticmethod
-    def __europalp_tokenizer__(text: str, lang: str):
+    def __europalp_tokenizer(text: str, lang: str):
         FNULL = open(os.devnull, 'w')
         p = subprocess.Popen(
             ["perl", "tools/europalp_tokenizer/tokenizer.perl", "-l", lang],
