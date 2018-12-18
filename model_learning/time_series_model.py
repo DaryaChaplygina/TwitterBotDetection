@@ -11,20 +11,20 @@ class TimeSeriesModel:
 
     def run_model(self):
         train, test = train_test_split(self.data, test_size=0.3,
-                                       random_state=17)
+                                       random_state=14)
         prof_lr, tweet_lr = self.train_model(train)
         pred, real = self.predict(test, prof_lr, tweet_lr)
         pred_class = np.argmax(pred, axis=1)
-        print(precision_recall_fscore_support(real, pred_class))
+        return precision_recall_fscore_support(real, pred_class)
 
     def train_model(self, train: pd.DataFrame):
         train_prof, train_tweet_all, train_labels = self.prepare_data(train)
-        profile_lr = LogisticRegression(n_jobs=-1).fit(train_prof,
+        profile_lr = LogisticRegression().fit(train_prof,
                                                        train_labels)
 
         train_tweet, tweet_labels = self.__dropna_tweet(train_tweet_all,
                                                         train_labels)
-        tweet_lr = LogisticRegression(n_jobs=-1).fit(train_tweet,
+        tweet_lr = LogisticRegression().fit(train_tweet,
                                                      tweet_labels)
         return profile_lr, tweet_lr
 
@@ -80,4 +80,4 @@ class TimeSeriesModel:
 if __name__ == "__main__":
     # simple test
     ts = TimeSeriesModel("../Datasets/cresci-2017/timeseries_features.csv")
-    ts.run_model()
+    print(ts.run_model())
