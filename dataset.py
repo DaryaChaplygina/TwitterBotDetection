@@ -13,9 +13,9 @@ class Dataset:
         users = Users(self._path + "users.csv")
         self._dataset['id'] = users.get_uids()
         if len(label) == 0:
-            self._dataset.assign(label="")
+            self._dataset = self._dataset.assign(label="")
         else:
-            self._dataset.assign(label=label)
+            self._dataset = self._dataset.assign(label=label)
 
     def add_user_features(self):
         users = Users(self._path + "users.csv")
