@@ -41,9 +41,14 @@ class Dataset:
     def add_tweet_text_features(self):
         tweets = Tweets(self._path + "tweets.csv")
         tp = TextProcessor()
-        self._dataset['tweets'] = self._dataset['id'].head(1)\
+        self._dataset['tweets'] = self._dataset['id']\
             .apply(lambda id: [tp.preprocess(tweet) for tweet in
                                tweets.get_user_tweets(id)])
+        
+    def add_tweet_timeseries_features(self):
+        tweets = Tweets(self._path + "tweets.csv")
+        self._dataset['tweets_entropy'] = self._dataset['id']\
+            .apply(tweets.get_ti_entropy)
 
     def save(self, save_path: str):
         if os.path.isfile(save_path):
