@@ -1,6 +1,6 @@
 import json
 
-from dataset_creating.dataset import Dataset
+from dataset import Dataset
 
 
 class DatasetsCollector:
