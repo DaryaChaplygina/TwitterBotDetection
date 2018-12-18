@@ -21,13 +21,11 @@ class TimeSeriesModel:
         train_prof, train_tweet_all, train_labels = self.prepare_data(train)
         profile_lr = LogisticRegression(n_jobs=-1).fit(train_prof,
                                                        train_labels)
-        print("done prof")
 
         train_tweet, tweet_labels = self.__dropna_tweet(train_tweet_all,
                                                         train_labels)
         tweet_lr = LogisticRegression(n_jobs=-1).fit(train_tweet,
                                                      tweet_labels)
-        print("done tweet")
         return profile_lr, tweet_lr
 
     def prepare_data(self, data: pd.DataFrame):
