@@ -13,14 +13,16 @@ class DatasetsCollector:
         data = json.load(f)
         self._ds_files = data[ds_name]
 
-    def collect_all(self, save_path: str):
-        for [path, label] in self._ds_files:
-            ds = Dataset(path, label)
+    def collect_timeseries_dataset(self, save_path: str):
+        for data in self._ds_files:
+            ds = Dataset(data['path'], data['label'])
             ds.add_user_features()
             ds.add_tweet_statistical_features()
+            ds.add_tweet_timeseries_features()
             ds.save(save_path)
 
 
 if __name__ == "__main__":
-    fc = DatasetsCollector("cresci-2017")
-    fc.collect_all('Datasets/cresci-2017/all_features.csv')
+    dc = DatasetsCollector("cresci-2017")
+    dc.collect_timeseries_dataset('Datasets/cresci-2017/'
+                                  'timeseries_features.csv')
