@@ -14,6 +14,9 @@ def count_entropy(series: np.ndarray):
     r = 1
     N = series.shape[0]
 
+    if N == 1:
+        return 0
+
     def _phi(m):
         xs = [series[i:i+m] for i in range(N - m + 1)]
         dist_matrix = count_dist_matrix(xs, m, N)
@@ -27,4 +30,7 @@ def count_entropy(series: np.ndarray):
 
         return sum(C_m) / (N - m + 1)
 
-    return _phi(2) - _phi(3)
+    if N == 2:
+        return _phi(1) - _phi(2)
+    else:
+        return _phi(2) - _phi(3)
