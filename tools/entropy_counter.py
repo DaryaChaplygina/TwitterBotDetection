@@ -1,21 +1,22 @@
 import numpy as np
 
 
+def count_dist_matrix(xs, m, N):
+    dist_matrix = np.zeros((N - m + 1, N - m + 1))
+    for i in range(N - m + 1):
+        for j in range(i, N - m + 1):
+            dist_matrix[i, j] = dist_matrix[j, i] = \
+                max([abs(xs[i][k] - xs[j][k]) for k in range(m)])
+    return dist_matrix
+
+
 def count_entropy(series: np.ndarray):
     r = 1
     N = series.shape[0]
 
-    def _dist_matrix(xs, m):
-        dist_matrix = np.zeros((N - m + 1, N - m + 1))
-        for i in range(N - m + 1):
-            for j in range(i, N - m + 1):
-                dist_matrix[i, j] = dist_matrix[j, i] = \
-                    max([abs(xs[i][k] - xs[j][k]) for k in range(m)])
-        return dist_matrix
-
     def _phi(m):
         xs = [series[i:i+m] for i in range(N - m + 1)]
-        dist_matrix = _dist_matrix(xs, m)
+        dist_matrix = count_dist_matrix(xs, m, N)
 
         C_m = []
         for i in range(N - m + 1):

@@ -52,7 +52,7 @@ class Tweets:
         return len(set(all_unames)) / len(tweets)
 
     def get_ti_entropy(self, uid: int):
-        ts = self.get_timestamps(uid)
+        ts = self.get_tweets_timestamps(uid)
         if len(ts) == 0:
             return 0
         intervals = []
@@ -68,7 +68,7 @@ class Tweets:
         print(uid, "+")                     # progress output
         return entropy
 
-    def get_timestamps(self, uid: int):
+    def get_tweets_timestamps(self, uid: int):
         timestamps = self._data_frame\
             .loc[self._data_frame['user_id'] == uid]['timestamp'].values
         timestamps = [datetime.strptime(ts, "%Y-%m-%d %H:%M:%S") for ts in
@@ -79,5 +79,5 @@ class Tweets:
 if __name__ == "__main__":
     # simple test
     t = Tweets('/home/dario/Diploma/Datasets/cresci-2017/datasets_full.csv'
-               '/social_spambots_3.csv/tweets.csv')
-    print(t.get_ti_entropy(16282004))
+               '/genuine_accounts.csv/tweets.csv')
+    print(t.get_user_tweets(1553611423))
