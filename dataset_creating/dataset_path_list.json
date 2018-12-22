@@ -1,8 +1,8 @@
 {
     "cresci-2017": [
-        {"path": "../Datasets/cresci-2017/genuine_accounts/",  "label": "genuine"},
-        {"path": "../Datasets/cresci-2017/spambots_1/",        "label": "bot"},
-        {"path": "../Datasets/cresci-2017/spambots_2/",        "label": "bot"},
-        {"path": "../Datasets/cresci-2017/spambots_3/",        "label": "bot"}
+        {"path": "Datasets/cresci-2017/genuine_accounts/",  "label": "genuine"},
+        {"path": "Datasets/cresci-2017/spambots_1/",        "label": "bot"},
+        {"path": "Datasets/cresci-2017/spambots_2/",        "label": "bot"},
+        {"path": "Datasets/cresci-2017/spambots_3/",        "label": "bot"}
     ]
 }

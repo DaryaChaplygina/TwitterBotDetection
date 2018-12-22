@@ -1,10 +1,8 @@
 import os
-
 import pandas as pd
-
-from text_processor_simple import TextProcessor
-from tweets import Tweets
-from users import Users
+from dataset_creating.text_processor_simple import TextProcessor
+from dataset_creating.tweets import Tweets
+from dataset_creating.users import Users
 
 
 class Dataset:
