@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 class Users:
@@ -19,8 +20,14 @@ class Users:
         return self._data_frame['friends_count']
 
     def followers_to_following_ratio(self):
-        return self._data_frame['followers_count']\
+        res = self._data_frame['followers_count']\
             .divide(self._data_frame['friends_count'])
+
+        for idx, value in res.iteritems():
+            if np.isnan(res[idx]):      # 0/0 division
+                res[idx] = 1
+
+        return res
 
 
 if __name__ == "__main__":
